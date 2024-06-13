@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ldn01s65^)f0ba!my+4&o@xqlkhu+rrgp5z00(^^f73p6j7yo8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*','project.csespl.in',]
 
 CSRF_TRUSTED_ORIGINS = ['https://project.csespl.in']
 
@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.mi
+ddleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,6 +145,6 @@ JAZZMIN_SETTINGS = {
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Sathyabama Project",
-
+    "site_logo": "https://guideselectionportal.cse-soc.com/assets/sist_logo_login-db341378.png",
     "user_avatar": "profile_picture",
 }
