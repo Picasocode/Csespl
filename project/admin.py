@@ -133,22 +133,24 @@ class ProjectAdmin(admin.ModelAdmin):
         return False
     
     def get_readonly_fields(self, request, obj=None):
-        readonly_fields = ['guide','denied_reason']  # Default readonly fields
+        readonly_fields = []  # Default readonly fields
         if obj:
             if obj.status and obj.status != 'pending':  # If status is set and not pending, make it readonly
                 readonly_fields.append('status')
         if not request.user.is_superuser:
             if request.user.role == 'Student':
-                readonly_fields.remove('guide')  # Students can edit guide
                 readonly_fields.append('status')  # Students cannot edit status
             elif request.user.role == 'Staff':
-                readonly_fields.remove('denied_reason')
                 readonly_fields.append('guide')  # Staff cannot edit guide
-        if obj:
-            if obj.status and obj.status == 'accepted':  # If status is set and not pending, make it readonly
-                readonly_fields=['type','guide','research_outcome','title','project_domain','abstract','status','denied_reason']
-        return readonly_fields
-    
+                if obj and obj.status == 'pending':
+                    pass  # Staff can edit status only if it's pending
+                else:
+                    readonly_fields.append('status') 
+            if obj:
+                if obj.status and obj.status == 'accepted':  # If status is set and not pending, make it readonly
+                    readonly_fields=['type','guide','research_outcome','project_domain','status','denied_reason']
+        return readonly_fields # Make status readonly if it's already set
+   
     def save_model(self, request, obj, form, change):
         if not change and obj.guide:
             staff_projects_count = Project.objects.filter(guide=obj.guide).count()
