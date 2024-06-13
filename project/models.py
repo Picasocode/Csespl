@@ -26,14 +26,14 @@ class Project(models.Model):
         ('denied', 'Denied'),
     )
     type = models.CharField(max_length=100, choices=PROJECT_TYPES)
-    research_outcome = models.CharField(max_length=100, choices=SCOPE_CHOICES,default="Patent")
+    research_outcome = models.CharField(max_length=100, choices=SCOPE_CHOICES,)
     title = models.CharField(max_length=255)
-    project_domain=models.CharField(max_length=255,default="Cyber")
-    abstract=models.TextField(default="hi")
+    project_domain=models.CharField(max_length=255,default="Ex:AI,Deep Learning,Cyber Security ....")
+    abstract=models.TextField(default="Maximum 500 Words",max_lenght=500)
     members = models.ManyToManyField(CustomUser, through='ProjectMember')
     guide = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='guided_projects')
     status = models.CharField(max_length=10, choices=ACCEPTANCE_STATUS_CHOICES, default='pending')
-    denied_reason = models.TextField(blank=True, null=True)
+    denied_reason = models.TextField(default="Nil")
     def __str__(self):
         return self.title
 
