@@ -29,7 +29,7 @@ class Project(models.Model):
     research_outcome = models.CharField(max_length=100, choices=SCOPE_CHOICES,)
     title = models.CharField(max_length=255)
     project_domain=models.CharField(max_length=255,default="Ex:AI,Deep Learning,Cyber Security ....")
-    abstract=models.TextField(default="Maximum 500 Words",max_lenght=500)
+    abstract=models.TextField(default="Maximum 500 Words",max_length=500)
     members = models.ManyToManyField(CustomUser, through='ProjectMember')
     guide = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='guided_projects')
     status = models.CharField(max_length=10, choices=ACCEPTANCE_STATUS_CHOICES, default='pending')
